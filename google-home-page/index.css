@@ -38,16 +38,16 @@ body {
     background-color: rgb(239, 240, 240);
 }
 
+
+/* Use Flex box to center the elements */
 .btn-wrapper {
     display: flex;
     justify-content: center;
-
 }
 
 .bn-link {
     text-align: center;
     margin-top: 40px;
-    font-size: 14px;
     font-size: 12px;
 }
 
