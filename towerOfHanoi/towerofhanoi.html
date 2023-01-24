@@ -238,9 +238,24 @@
         var numbers = [1, 2, 3, 4];
 
         function shuffleNumbers() {
-            numbers = numbers.sort(() => Math.random() - 0.3);
+            temp = numbers.sort(() => Math.random() - 0.3);
+
+            // check if the number is already sorted or not
+            if (isSorted(numbers, temp)) {
+                console.log("sorted");
+                shuffleNumbers();
+            } else {
+                numbers = temp;
+            }
+            // checking ends
+
             setValue();
         }
+
+        // function that loads when the page loads
+        window.onload = function() {
+            shuffleNumbers();
+        };
 
         function setValue() {
             let btns = document.querySelectorAll(".allBtn");
@@ -254,9 +269,21 @@
             }
         }
 
+        function isSorted(actualArr, newArr) {
+            
+            if (actualArr.length != newArr) return false;
+            else {
+                for(let i=0; i<actualArr.length; i++){
+                    if(actualArr[i] != newArr[i]) return false;
+                }
+                return true;
+            }
+        }
+
         function checkValues() {
             let newNum = [];
             let buttons = document.querySelectorAll(".btns");
+
             for (let i = 0; i < buttons.length; i++) {
                 let btnChild = buttons[i].children;
 
@@ -287,6 +314,20 @@
             let btnChild = buttons[from - 1].children;     // 1
 
             let div = document.querySelectorAll(".btns")[to - 1];    // 2
+
+            // check if larger number is placed on smaller number
+            let incoming = btnChild[0].innerHTML;
+            let current = div.children[0];
+
+            if (current != null) {
+                current = current.innerHTML;
+            }
+
+            if (incoming > current){
+                alert("Invalid Move");
+                return;
+            }
+            // checking ends
 
             div.insertBefore(btnChild[0], div.childNodes[0]);
         }
